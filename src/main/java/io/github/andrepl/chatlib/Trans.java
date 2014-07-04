@@ -41,7 +41,7 @@ public class Trans extends ChatMessage {
 		return append(Util.fromItemStack(stack));
 	}
 
-	public Trans fromItemStack(ItemStack stack) {
+	public static Trans fromItemStack(ItemStack stack) {
 		return Util.fromItemStack(stack);
 	}
 

@@ -13,23 +13,31 @@ import static org.junit.Assert.assertTrue;
 public class ChatComponentTest extends AbstractTestingBase {
 
 	@Test
-	public void appendItemEqualsFromItemThenAppend() {
+	public void convenienceFromItemStack() {
+		ItemStack stack = new ItemStack(Material.LOG);
+		assertEquals(Util.fromItemStack(stack), Text.fromItemStack(stack));
+		assertEquals(Util.fromItemStack(stack), Trans.fromItemStack(stack));
+	}
 
+	@Test
+	public void appendItemEqualsFromItemThenAppend() {
+		ItemStack stack = new ItemStack(Material.LOG);
 		assertEquals(
-			new Text("").append(Util.fromItemStack(new ItemStack(Material.LOG))),
-			new Text("").appendItem(new ItemStack(Material.LOG))
+			new Text("").append(Util.fromItemStack(stack)),
+			new Text("").appendItem(stack)
 		);
 
 		assertEquals(
-			new Trans("").append(Util.fromItemStack(new ItemStack(Material.LOG))),
-			new Trans("").appendItem(new ItemStack(Material.LOG))
+			new Trans("").append(Util.fromItemStack(stack)),
+			new Trans("").appendItem(stack)
 		);
 
 	}
 
 	@Test
 	public void fromItemStackUsesTranslation() {
-		assertTrue(ChatSerializer.a(Util.fromItemStack(new ItemStack(Material.LOG))).indexOf("\"translate\":\"tile.log.oak.name\"") != -1);
+		ItemStack stack = new ItemStack(Material.LOG);
+		assertTrue(ChatSerializer.a(Util.fromItemStack(stack)).indexOf("\"translate\":\"tile.log.oak.name\"") != -1);
 	}
 
 	@Test

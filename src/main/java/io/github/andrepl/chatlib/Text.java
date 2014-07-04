@@ -30,7 +30,7 @@ public class Text extends ChatComponentText {
 		return this;
 	}
 
-	public Trans fromItemStack(ItemStack stack) {
+	public static Trans fromItemStack(ItemStack stack) {
 		return Util.fromItemStack(stack);
 	}
 
