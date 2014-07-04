@@ -2,8 +2,10 @@ package io.github.andrepl.chatlib;
 
 import net.minecraft.server.v1_7_R3.Item;
 import org.bukkit.craftbukkit.v1_7_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_7_R3.potion.CraftPotionEffectType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -79,7 +81,7 @@ public class Lang {
 	public static String translatableFromStack(ItemStack stack) {
 		net.minecraft.server.v1_7_R3.ItemStack nms = CraftItemStack.asNMSCopy(stack);
 		Item item = nms.getItem();
-		return item.a(nms);
+		return item.a(nms) + ".name";
 	}
 	/**
 	 * get the name of the provided item translated to the server's language
@@ -134,6 +136,39 @@ public class Lang {
 		}
 		return val;
 	}
+
+
+	/**
+	 * get the translatable string representing the name of the provided potion effect.
+	 *   eg.
+	 *     Lang.translatableFromEnchantment(PotionEffectType.FAST_DIGGING)
+	 *     -> "potion.digSpeed"
+	 *
+	 * @param effectType - a PotionEffectType
+	 * @return the translatable string representing the name of the potion effect.
+	 */
+	public static String translatableFromPotionEffectType(PotionEffectType effectType) {
+		CraftPotionEffectType craftType = (CraftPotionEffectType) PotionEffectType.getById(effectType.getId());
+		return craftType.getHandle().a();
+	}
+
+	/**
+	 * get the name of the provided Potion Effect translated to the server's language
+	 *   eg.
+	 *     Lang.fromPotionEffectType(PotionEffectType.FAST_DIGGING)
+	 *     -> "potion.digSpeed"
+	 * @param effectType - a PotionEffectType
+	 * @return - translated name of the Potion Effect.
+	 */
+	public static String fromPotionEffectType(PotionEffectType effectType) {
+		String node = translatableFromPotionEffectType(effectType);
+		String val = translations.get(node);
+		if (val == null) {
+			return node;
+		}
+		return val;
+	}
+
 
 	/**
 	 * translate the provided translatable string into the server's language,

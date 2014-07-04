@@ -6,11 +6,9 @@ import net.minecraft.server.v1_7_R3.ChatComponentText;
 import net.minecraft.server.v1_7_R3.ChatHoverable;
 import net.minecraft.server.v1_7_R3.EnumChatFormat;
 import net.minecraft.server.v1_7_R3.IChatBaseComponent;
-import net.minecraft.server.v1_7_R3.NBTTagCompound;
 import net.minecraft.server.v1_7_R3.PacketPlayOutChat;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_7_R3.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_7_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -32,11 +30,12 @@ public class Text extends ChatComponentText {
 		return this;
 	}
 
+	public Trans fromItemStack(ItemStack stack) {
+		return Util.fromItemStack(stack);
+	}
+
 	public Text appendItem(ItemStack stack) {
-		net.minecraft.server.v1_7_R3.ItemStack nms = CraftItemStack.asNMSCopy(stack);
-		NBTTagCompound tag = new NBTTagCompound();
-		nms.save(tag);
-		return append(new Text(nms.getName()).setColor(ChatColor.getByChar(nms.w().e.getChar())).setHover(HoverAction.SHOW_ITEM, new ChatComponentText(tag.toString())));
+		return append(Util.fromItemStack(stack));
 	}
 
 	public Text setBold(boolean bold) {
