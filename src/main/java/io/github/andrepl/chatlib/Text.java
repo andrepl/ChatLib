@@ -6,10 +6,8 @@ import net.minecraft.server.v1_7_R3.ChatComponentText;
 import net.minecraft.server.v1_7_R3.ChatHoverable;
 import net.minecraft.server.v1_7_R3.EnumChatFormat;
 import net.minecraft.server.v1_7_R3.IChatBaseComponent;
-import net.minecraft.server.v1_7_R3.PacketPlayOutChat;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftPlayer;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 
 
@@ -92,12 +90,6 @@ public class Text extends ChatComponentText {
 	}
 
 	public void send(CommandSender sender) {
-		if (!(sender instanceof Player)) {
-			sender.sendMessage(this.c());
-		} else {
-			Player player = (Player)sender;
-			PacketPlayOutChat packet = new PacketPlayOutChat(this, true);
-			((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
-		}
+		Util.send(sender, this);
 	}
 }

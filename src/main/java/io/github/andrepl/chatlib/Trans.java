@@ -5,10 +5,8 @@ import net.minecraft.server.v1_7_R3.ChatHoverable;
 import net.minecraft.server.v1_7_R3.ChatMessage;
 import net.minecraft.server.v1_7_R3.EnumChatFormat;
 import net.minecraft.server.v1_7_R3.IChatBaseComponent;
-import net.minecraft.server.v1_7_R3.PacketPlayOutChat;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftPlayer;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 
 public class Trans extends ChatMessage {
@@ -89,8 +87,7 @@ public class Trans extends ChatMessage {
 		return setHover(HoverAction.SHOW_TEXT, new Text(text));
 	}
 
-	public void send(Player player) {
-		PacketPlayOutChat packet = new PacketPlayOutChat(this, true);
-		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+	public void send(CommandSender sender) {
+		Util.send(sender, this);
 	}
 }
