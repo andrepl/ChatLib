@@ -36,6 +36,13 @@ public class Text extends ChatComponentText {
 		return append(Util.fromItemStack(stack));
 	}
 
+	public Text appendItem(ItemStack stack, ChatColor color) {
+		net.minecraft.server.v1_7_R3.ItemStack nms = CraftItemStack.asNMSCopy(stack);
+		NBTTagCompound tag = new NBTTagCompound();
+		nms.save(tag);
+		return append(new Text(nms.getName()).setColor(color).setHover(HoverAction.SHOW_ITEM, new ChatComponentText(tag.toString())));
+	}
+
 	public Text setBold(boolean bold) {
 		getChatModifier().setBold(bold);
 		return this;
