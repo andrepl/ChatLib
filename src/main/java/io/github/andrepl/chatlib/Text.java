@@ -91,8 +91,13 @@ public class Text extends ChatComponentText {
 		return h();
 	}
 
-	public void send(Player player) {
-		PacketPlayOutChat packet = new PacketPlayOutChat(this, true);
-		((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+	public void send(CommandSender sender) {
+		if (!(sender instanceof Player)) {
+			sender.sendMessage(this.c());
+		} else {
+			Player player = (Player)sender;
+			PacketPlayOutChat packet = new PacketPlayOutChat(this, true);
+			((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+		}
 	}
 }
