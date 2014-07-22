@@ -1,13 +1,13 @@
 package io.github.andrepl.chatlib;
 
-import net.minecraft.server.v1_7_R3.ChatComponentText;
-import net.minecraft.server.v1_7_R3.IChatBaseComponent;
-import net.minecraft.server.v1_7_R3.NBTTagCompound;
-import net.minecraft.server.v1_7_R3.PacketPlayOutChat;
+import net.minecraft.server.v1_7_R4.ChatComponentText;
+import net.minecraft.server.v1_7_R4.IChatBaseComponent;
+import net.minecraft.server.v1_7_R4.NBTTagCompound;
+import net.minecraft.server.v1_7_R4.PacketPlayOutChat;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_7_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_7_R4.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
