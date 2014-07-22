@@ -1,10 +1,10 @@
 package io.github.andrepl.chatlib;
 
-import net.minecraft.server.v1_7_R3.ChatClickable;
-import net.minecraft.server.v1_7_R3.ChatHoverable;
-import net.minecraft.server.v1_7_R3.ChatMessage;
-import net.minecraft.server.v1_7_R3.EnumChatFormat;
-import net.minecraft.server.v1_7_R3.IChatBaseComponent;
+import net.minecraft.server.v1_7_R4.ChatClickable;
+import net.minecraft.server.v1_7_R4.ChatHoverable;
+import net.minecraft.server.v1_7_R4.ChatMessage;
+import net.minecraft.server.v1_7_R4.EnumChatFormat;
+import net.minecraft.server.v1_7_R4.IChatBaseComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
@@ -25,12 +25,12 @@ public class Trans extends ChatMessage {
 	}
 
 	public Trans append(IChatBaseComponent node) {
-		return (Trans) a(node);
+		return (Trans) addSibling(node);
 	}
 
 	public Trans append(IChatBaseComponent... nodes) {
 		for (IChatBaseComponent node : nodes) {
-			a(node);
+			addSibling(node);
 		}
 		return this;
 	}
