@@ -1,8 +1,8 @@
 package io.github.andrepl.chatlib;
 
-import net.minecraft.server.v1_7_R3.Item;
-import org.bukkit.craftbukkit.v1_7_R3.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.v1_7_R3.potion.CraftPotionEffectType;
+import net.minecraft.server.v1_7_R4.Item;
+import org.bukkit.craftbukkit.v1_7_R4.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_7_R4.potion.CraftPotionEffectType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
@@ -79,7 +79,7 @@ public class Lang {
 	 * @return the translatable string representing the item name.
 	 */
 	public static String translatableFromStack(ItemStack stack) {
-		net.minecraft.server.v1_7_R3.ItemStack nms = CraftItemStack.asNMSCopy(stack);
+		net.minecraft.server.v1_7_R4.ItemStack nms = CraftItemStack.asNMSCopy(stack);
 		Item item = nms.getItem();
 		return item.a(nms) + ".name";
 	}
@@ -112,7 +112,7 @@ public class Lang {
 	 */
 	public static String translatableFromEnchantment(Enchantment ench) {
 
-		net.minecraft.server.v1_7_R3.Enchantment nms = net.minecraft.server.v1_7_R3.Enchantment.byId[ench.getId()];
+		net.minecraft.server.v1_7_R4.Enchantment nms = net.minecraft.server.v1_7_R4.Enchantment.byId[ench.getId()];
 		if (nms == null) {
 			return ench.getName();
 		} else {
