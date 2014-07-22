@@ -18,12 +18,12 @@ public class Text extends ChatComponentText {
 	}
 
 	public Text append(IChatBaseComponent node) {
-		return (Text) a(node);
+		return (Text) addSibling(node);
 	}
 
 	public Text append(IChatBaseComponent... nodes) {
 		for (IChatBaseComponent node : nodes) {
-			a(node);
+			addSibling(node);
 		}
 		return this;
 	}
