@@ -34,7 +34,7 @@ public class Util {
 		if (!(sender instanceof Player)) {
 			sender.sendMessage(text.c());
 		} else {
-			Player player = (Player) sender;
+			Player player = (Player)sender;
 			PacketPlayOutChat packet = new PacketPlayOutChat(text, true);
 			((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
 		}
