@@ -1,6 +1,11 @@
 package io.github.andrepl.chatlib;
 
-import net.minecraft.server.v1_8_R1.*;
+import net.minecraft.server.v1_8_R1.ChatClickable;
+import net.minecraft.server.v1_8_R1.ChatHoverable;
+import net.minecraft.server.v1_8_R1.ChatMessage;
+import net.minecraft.server.v1_8_R1.EnumChatFormat;
+import net.minecraft.server.v1_8_R1.IChatBaseComponent;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
