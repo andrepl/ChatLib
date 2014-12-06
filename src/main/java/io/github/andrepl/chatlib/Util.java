@@ -20,23 +20,23 @@ public class Util {
             NBTTagCompound nbttagcompound = tag.getCompound("display");
 
             if (nbttagcompound.hasKeyOfType("Name", 8)) {
-				return nbttagcompound.getString("Name");
-			}
-		}
+                return nbttagcompound.getString("Name");
+            }
+        }
 
         return stack.getItem().a(stack) + ".name";
-	}
+    }
 
-	public static Trans fromItemStack(ItemStack stack) {
+    public static Trans fromItemStack(ItemStack stack) {
         net.minecraft.server.v1_8_R1.ItemStack nms = CraftItemStack.asNMSCopy(stack);
         NBTTagCompound tag = new NBTTagCompound();
-		nms.save(tag);
+        nms.save(tag);
         return new Trans(getName(nms)).
                 setColor(ChatColor.getByChar(nms.u().e.name())).
                 setHover(HoverAction.SHOW_ITEM, new ChatComponentText(tag.toString()));
     }
-	
-	public static void send(CommandSender sender, IChatBaseComponent text) {
+
+    public static void send(CommandSender sender, IChatBaseComponent text) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             PacketPlayOutChat packet = new PacketPlayOutChat(text, (byte) 0);
