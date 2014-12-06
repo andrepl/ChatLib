@@ -1,15 +1,9 @@
 package io.github.andrepl.chatlib;
 
-
-import net.minecraft.server.v1_7_R3.ChatClickable;
-import net.minecraft.server.v1_7_R3.ChatComponentText;
-import net.minecraft.server.v1_7_R3.ChatHoverable;
-import net.minecraft.server.v1_7_R3.EnumChatFormat;
-import net.minecraft.server.v1_7_R3.IChatBaseComponent;
+import net.minecraft.server.v1_8_R1.*;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
-
 
 public class Text extends ChatComponentText {
 
@@ -72,8 +66,8 @@ public class Text extends ChatComponentText {
 	}
 
 	public Text setHover(HoverAction action, IChatBaseComponent value) {
-		getChatModifier().a(new ChatHoverable(action.getNMS(), value));
-		return this;
+        getChatModifier().setChatHoverable(new ChatHoverable(action.getNMS(), value));
+        return this;
 	}
 
 	public Text setHoverText(String text) {

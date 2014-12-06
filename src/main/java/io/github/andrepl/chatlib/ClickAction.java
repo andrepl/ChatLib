@@ -1,9 +1,10 @@
 package io.github.andrepl.chatlib;
 
-import net.minecraft.server.v1_7_R4.EnumClickAction;
+import net.minecraft.server.v1_8_R1.EnumClickAction;
 
 public enum ClickAction {
-	OPEN_URL(EnumClickAction.OPEN_URL),
+
+    OPEN_URL(EnumClickAction.OPEN_URL),
 	OPEN_FILE(EnumClickAction.OPEN_FILE),
 	RUN_COMMAND(EnumClickAction.RUN_COMMAND),
 	SUGGEST_COMMAND(EnumClickAction.SUGGEST_COMMAND);

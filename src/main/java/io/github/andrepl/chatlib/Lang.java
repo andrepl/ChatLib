@@ -1,8 +1,8 @@
 package io.github.andrepl.chatlib;
 
-import net.minecraft.server.v1_7_R4.Item;
-import org.bukkit.craftbukkit.v1_7_R4.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.v1_7_R4.potion.CraftPotionEffectType;
+import net.minecraft.server.v1_8_R1.Item;
+import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_8_R1.potion.CraftPotionEffectType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
@@ -35,15 +35,16 @@ public class Lang {
 	 * This must be called after Craftbukkit loads, before you attempt to
 	 * access any other methods of this class.
 	 *
-	 * @throws IOException
-	 */
-	public static void initialize(String lang) throws IOException {
-		translations = new HashMap<String, String>();
+     * @throws java.io.IOException
+     */
+    public static void initialize(String lang) throws IOException {
+        translations = new HashMap<String, String>();
 		if (lang == null) {
 			lang = "en_US";
 		}
-		if (!lang.equals(language)) {
-			language = lang;
+
+        if (!lang.equals(language)) {
+            language = lang;
 			String resourcePath = "/assets/minecraft/lang/" + language + ".lang";
 			InputStream fis = Item.class.getResourceAsStream(resourcePath);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
@@ -79,9 +80,9 @@ public class Lang {
 	 * @return the translatable string representing the item name.
 	 */
 	public static String translatableFromStack(ItemStack stack) {
-		net.minecraft.server.v1_7_R4.ItemStack nms = CraftItemStack.asNMSCopy(stack);
-		Item item = nms.getItem();
-		return item.a(nms) + ".name";
+        net.minecraft.server.v1_8_R1.ItemStack nms = CraftItemStack.asNMSCopy(stack);
+        Item item = nms.getItem();
+        return item.a(nms) + ".name";
 	}
 	/**
 	 * get the name of the provided item translated to the server's language
@@ -111,34 +112,26 @@ public class Lang {
 	 * @return the translatable string representing the name of the enchantment.
 	 */
 	public static String translatableFromEnchantment(Enchantment ench) {
+        net.minecraft.server.v1_8_R1.Enchantment nms = net.minecraft.server.v1_8_R1.Enchantment.getById(ench.getId());
+        return (nms == null) ? ench.getName() : nms.a();
+    }
 
-		net.minecraft.server.v1_7_R4.Enchantment nms = net.minecraft.server.v1_7_R4.Enchantment.byId[ench.getId()];
-		if (nms == null) {
-			return ench.getName();
-		} else {
-			return nms.a();
-		}
-	}
-
-	/**
-	 * get the name of the provided enchantment translated to the server's language
-	 *   eg.
-	 *     Lang.fromEnchantment(Enchantment.DIG_SPEED)
-	 *     -> "enchantment.digging"
-	 * @param ench - a Bukkit Enchantment
-	 * @return - translated name of the enchantment.
-	 */
+    /**
+     * get the name of the provided enchantment translated to the server's language
+     *   eg.
+     *     Lang.fromEnchantment(Enchantment.DIG_SPEED)
+     *     -> "enchantment.digging"
+     * @param ench - a Bukkit Enchantment
+     * @return - translated name of the enchantment.
+     */
 	public static String fromEnchantment(Enchantment ench) {
 		String node = translatableFromEnchantment(ench);
 		String val = translations.get(node);
-		if (val == null) {
-			return node;
-		}
-		return val;
-	}
+        return (val == null) ? node : val;
+    }
 
 
-	/**
+    /**
 	 * get the translatable string representing the name of the provided potion effect.
 	 *   eg.
 	 *     Lang.translatableFromEnchantment(PotionEffectType.FAST_DIGGING)
@@ -163,14 +156,11 @@ public class Lang {
 	public static String fromPotionEffectType(PotionEffectType effectType) {
 		String node = translatableFromPotionEffectType(effectType);
 		String val = translations.get(node);
-		if (val == null) {
-			return node;
-		}
-		return val;
-	}
+        return (val == null) ? node : val;
+    }
 
 
-	/**
+    /**
 	 * translate the provided translatable string into the server's language,
 	 *
 	 * if args are provided, the translated string must contain the same number of
@@ -186,5 +176,4 @@ public class Lang {
 	public static String translate(String key, Object... args) {
 		return String.format(translations.get(key), args);
 	}
-
 }
