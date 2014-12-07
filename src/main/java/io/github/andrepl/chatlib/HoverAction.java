@@ -1,19 +1,20 @@
 package io.github.andrepl.chatlib;
 
-import net.minecraft.server.v1_7_R4.EnumHoverAction;
+import net.minecraft.server.v1_8_R1.EnumHoverAction;
 
 public enum HoverAction {
-	SHOW_TEXT(EnumHoverAction.SHOW_TEXT),
-	SHOW_ITEM(EnumHoverAction.SHOW_ITEM),
-	SHOW_ACHIEVEMENT(EnumHoverAction.SHOW_ACHIEVEMENT);
 
-	private EnumHoverAction hoverAction;
+    SHOW_TEXT(EnumHoverAction.SHOW_TEXT),
+    SHOW_ITEM(EnumHoverAction.SHOW_ITEM),
+    SHOW_ACHIEVEMENT(EnumHoverAction.SHOW_ACHIEVEMENT);
 
-	HoverAction(EnumHoverAction hoverAction) {
-		this.hoverAction = hoverAction;
-	}
+    private EnumHoverAction hoverAction;
 
-	public EnumHoverAction getNMS() {
-		return hoverAction;
-	}
+    HoverAction(EnumHoverAction hoverAction) {
+        this.hoverAction = hoverAction;
+    }
+
+    public EnumHoverAction getNMS() {
+        return hoverAction;
+    }
 }
