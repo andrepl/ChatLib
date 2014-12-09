@@ -36,7 +36,7 @@ public class Util {
                 setHover(HoverAction.SHOW_ITEM, new ChatComponentText(tag.toString()));
     }
 
-    public static void send(CommandSender sender, IChatBaseComponent text, ChatPosition position) {
+    protected static void send(CommandSender sender, IChatBaseComponent text, ChatPosition position) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             PacketPlayOutChat packet = new PacketPlayOutChat(text, position.getId());
