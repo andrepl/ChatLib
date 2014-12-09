@@ -98,10 +98,7 @@ public class Lang {
     public static String fromStack(ItemStack stack) {
         String node = translatableFromStack(stack);
         String val = translations.get(node);
-        if (val == null) {
-            return node;
-        }
-        return val;
+        return (val == null) ? node : val;
     }
 
     /**

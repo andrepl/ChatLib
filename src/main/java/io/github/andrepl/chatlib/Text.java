@@ -12,6 +12,10 @@ import org.bukkit.inventory.ItemStack;
 
 public class Text extends ChatComponentText {
 
+    public Text(String string) {
+        super(string);
+    }
+
     public Text append(String text) {
         return (Text) a(text);
     }
@@ -24,6 +28,7 @@ public class Text extends ChatComponentText {
         for (IChatBaseComponent node : nodes) {
             addSibling(node);
         }
+
         return this;
     }
 
@@ -35,9 +40,17 @@ public class Text extends ChatComponentText {
         return append(Util.fromItemStack(stack));
     }
 
+    public boolean isBold() {
+        return getChatModifier().isBold();
+    }
+
     public Text setBold(boolean bold) {
         getChatModifier().setBold(bold);
         return this;
+    }
+
+    public boolean isItalic() {
+        return getChatModifier().isBold();
     }
 
     public Text setItalic(boolean italic) {
@@ -45,9 +58,17 @@ public class Text extends ChatComponentText {
         return this;
     }
 
+    public boolean isUnderlined() {
+        return getChatModifier().isUnderlined();
+    }
+
     public Text setUnderline(boolean underline) {
         getChatModifier().setUnderline(underline);
         return this;
+    }
+
+    public boolean isRandom() {
+        return getChatModifier().isRandom();
     }
 
     public Text setRandom(boolean random) {
@@ -55,9 +76,17 @@ public class Text extends ChatComponentText {
         return this;
     }
 
+    public boolean isStrikethrough() {
+        return getChatModifier().isStrikethrough();
+    }
+
     public Text setStrikethrough(boolean strikethrough) {
         getChatModifier().setStrikethrough(strikethrough);
         return this;
+    }
+
+    public ChatColor getColor() {
+        return ChatColor.valueOf(getChatModifier().getColor().name());
     }
 
     public Text setColor(ChatColor color) {
@@ -65,9 +94,17 @@ public class Text extends ChatComponentText {
         return this;
     }
 
+    public ChatClickable getChatClickable() {
+        return getChatModifier().h();
+    }
+
     public Text setClick(ClickAction action, String value) {
-        this.getChatModifier().setChatClickable(new ChatClickable(action.getNMS(), value));
+        getChatModifier().setChatClickable(new ChatClickable(action.getNMS(), value));
         return this;
+    }
+
+    public ChatHoverable getChatHoverable() {
+        return getChatModifier().i();
     }
 
     public Text setHover(HoverAction action, IChatBaseComponent value) {
@@ -77,10 +114,6 @@ public class Text extends ChatComponentText {
 
     public Text setHoverText(String text) {
         return setHover(HoverAction.SHOW_TEXT, new Text(text));
-    }
-
-    public Text(String s) {
-        super(s);
     }
 
     @Override
