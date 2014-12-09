@@ -12,12 +12,16 @@ import org.bukkit.inventory.ItemStack;
 
 public class Trans extends ChatMessage {
 
+    public Trans() {
+        super("");
+    }
+
     public Trans(String string, Object... objects) {
         super(string, objects);
     }
 
     public static Trans fromItemStack(ItemStack stack) {
-        return (Trans) Util.fromItemStack(stack);
+        return new Trans().append(Util.fromItemStack(stack));
     }
 
     public Trans append(String text) {
@@ -119,6 +123,10 @@ public class Trans extends ChatMessage {
     @Override
     public IChatBaseComponent f() {
         return h();
+    }
+
+    public void send(CommandSender sender) {
+        send(sender, ChatPosition.CHAT);
     }
 
     public void send(CommandSender sender, ChatPosition position) {
