@@ -12,13 +12,12 @@ import org.bukkit.inventory.ItemStack;
 
 public class Trans extends ChatMessage {
 
-    public Trans(String s, Object... objects) {
-        super(s, objects);
+    public Trans(String string, Object... objects) {
+        super(string, objects);
     }
 
-    @Override
-    public IChatBaseComponent f() {
-        return h();
+    public static Trans fromItemStack(ItemStack stack) {
+        return (Trans) Util.fromItemStack(stack);
     }
 
     public Trans append(String text) {
@@ -33,6 +32,7 @@ public class Trans extends ChatMessage {
         for (IChatBaseComponent node : nodes) {
             addSibling(node);
         }
+
         return this;
     }
 
@@ -40,8 +40,8 @@ public class Trans extends ChatMessage {
         return append(Util.fromItemStack(stack));
     }
 
-    public static Trans fromItemStack(ItemStack stack) {
-        return Util.fromItemStack(stack);
+    public boolean isBold() {
+        return getChatModifier().isBold();
     }
 
     public Trans setBold(boolean bold) {
@@ -49,9 +49,17 @@ public class Trans extends ChatMessage {
         return this;
     }
 
+    public boolean isItalic() {
+        return getChatModifier().isItalic();
+    }
+
     public Trans setItalic(boolean italic) {
         getChatModifier().setItalic(italic);
         return this;
+    }
+
+    public boolean isUnderlined() {
+        return getChatModifier().isUnderlined();
     }
 
     public Trans setUnderline(boolean underline) {
@@ -59,9 +67,17 @@ public class Trans extends ChatMessage {
         return this;
     }
 
+    public boolean isRandom() {
+        return getChatModifier().isRandom();
+    }
+
     public Trans setRandom(boolean random) {
         getChatModifier().setRandom(random);
         return this;
+    }
+
+    public boolean isStrikethrough() {
+        return getChatModifier().isStrikethrough();
     }
 
     public Trans setStrikethrough(boolean strikethrough) {
@@ -69,14 +85,26 @@ public class Trans extends ChatMessage {
         return this;
     }
 
+    public ChatColor getColor() {
+        return ChatColor.valueOf(getChatModifier().getColor().name());
+    }
+
     public Trans setColor(ChatColor color) {
         getChatModifier().setColor(EnumChatFormat.valueOf(color.name()));
         return this;
     }
 
+    public ChatClickable getChatClickable() {
+        return getChatModifier().h();
+    }
+
     public Trans setClick(ClickAction action, String value) {
         getChatModifier().setChatClickable(new ChatClickable(action.getNMS(), value));
         return this;
+    }
+
+    public ChatHoverable getChatHoverable() {
+        return getChatModifier().i();
     }
 
     public Trans setHover(HoverAction action, IChatBaseComponent value) {
@@ -88,7 +116,12 @@ public class Trans extends ChatMessage {
         return setHover(HoverAction.SHOW_TEXT, new Text(text));
     }
 
-    public void send(CommandSender sender) {
-        Util.send(sender, this);
+    @Override
+    public IChatBaseComponent f() {
+        return h();
+    }
+
+    public void send(CommandSender sender, ChatPosition position) {
+        Util.send(sender, this, position);
     }
 }
