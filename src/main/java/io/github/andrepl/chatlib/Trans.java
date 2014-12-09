@@ -16,6 +16,10 @@ public class Trans extends ChatMessage {
         super(string, objects);
     }
 
+    public static Trans fromItemStack(ItemStack stack) {
+        return (Trans) Util.fromItemStack(stack);
+    }
+
     public Trans append(String text) {
         return (Trans) a(text);
     }
@@ -34,10 +38,6 @@ public class Trans extends ChatMessage {
 
     public Trans appendItem(ItemStack stack) {
         return append(Util.fromItemStack(stack));
-    }
-
-    public static Trans fromItemStack(ItemStack stack) {
-        return Util.fromItemStack(stack);
     }
 
     public boolean isBold() {

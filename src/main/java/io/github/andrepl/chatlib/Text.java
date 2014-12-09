@@ -16,6 +16,10 @@ public class Text extends ChatComponentText {
         super(string);
     }
 
+    public static Text fromItemStack(ItemStack stack) {
+        return (Text) Util.fromItemStack(stack);
+    }
+
     public Text append(String text) {
         return (Text) a(text);
     }
@@ -30,10 +34,6 @@ public class Text extends ChatComponentText {
         }
 
         return this;
-    }
-
-    public static Trans fromItemStack(ItemStack stack) {
-        return Util.fromItemStack(stack);
     }
 
     public Text appendItem(ItemStack stack) {
