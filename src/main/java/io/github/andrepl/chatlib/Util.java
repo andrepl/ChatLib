@@ -42,7 +42,7 @@ public class Util {
             PacketPlayOutChat packet = new PacketPlayOutChat(text, position.getId());
             ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
         } else {
-            sender.sendMessage(text.c());
+            sender.sendMessage(text.getText());
         }
     }
 }
