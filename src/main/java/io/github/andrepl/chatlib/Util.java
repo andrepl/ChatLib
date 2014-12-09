@@ -36,10 +36,10 @@ public class Util {
                 setHover(HoverAction.SHOW_ITEM, new ChatComponentText(tag.toString()));
     }
 
-    public static void send(CommandSender sender, IChatBaseComponent text) {
+    public static void send(CommandSender sender, IChatBaseComponent text, ChatPosition position) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            PacketPlayOutChat packet = new PacketPlayOutChat(text, (byte) 0);
+            PacketPlayOutChat packet = new PacketPlayOutChat(text, position.getId());
             ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
         } else {
             sender.sendMessage(text.c());

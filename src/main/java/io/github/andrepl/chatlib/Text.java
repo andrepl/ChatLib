@@ -88,7 +88,7 @@ public class Text extends ChatComponentText {
         return h();
     }
 
-    public void send(CommandSender sender) {
-        Util.send(sender, this);
+    public void send(CommandSender sender, ChatPosition position) {
+        Util.send(sender, this, position);
     }
 }

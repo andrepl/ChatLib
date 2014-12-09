@@ -88,7 +88,7 @@ public class Trans extends ChatMessage {
         return setHover(HoverAction.SHOW_TEXT, new Text(text));
     }
 
-    public void send(CommandSender sender) {
-        Util.send(sender, this);
+    public void send(CommandSender sender, ChatPosition position) {
+        Util.send(sender, this, position);
     }
 }
