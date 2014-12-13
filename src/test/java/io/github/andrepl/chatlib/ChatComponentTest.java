@@ -1,6 +1,6 @@
 package io.github.andrepl.chatlib;
 
-import net.minecraft.server.v1_7_R3.ChatSerializer;
+import net.minecraft.server.v1_8_R1.ChatSerializer;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -37,7 +37,7 @@ public class ChatComponentTest extends AbstractTestingBase {
 	@Test
 	public void fromItemStackUsesTranslation() {
 		ItemStack stack = new ItemStack(Material.LOG);
-		assertTrue(ChatSerializer.a(Util.fromItemStack(stack)).indexOf("\"translate\":\"tile.log.oak.name\"") != -1);
+		assertTrue(ChatSerializer.a(Util.fromItemStack(stack)).contains("\"translate\":\"tile.log.oak.name\""));
 	}
 
 	@Test
@@ -46,8 +46,8 @@ public class ChatComponentTest extends AbstractTestingBase {
 		ItemMeta meta = stack.getItemMeta();
 		meta.setDisplayName("Oke Lawg");
 		stack.setItemMeta(meta);
-		assertTrue(ChatSerializer.a(Util.fromItemStack(stack)).indexOf("\"translate\":\"tile.log.oak.name\"") == -1);
-		assertTrue(ChatSerializer.a(Util.fromItemStack(stack)).indexOf("\"translate\":\"Oke Lawg\"") != -1);
+		assertTrue(!ChatSerializer.a(Util.fromItemStack(stack)).contains("\"translate\":\"tile.log.oak.name\""));
+		assertTrue(ChatSerializer.a(Util.fromItemStack(stack)).contains("\"translate\":\"Oke Lawg\""));
 	}
 
 	@Test
@@ -61,8 +61,8 @@ public class ChatComponentTest extends AbstractTestingBase {
 	@Test
 	public void transWithVariables() {
 		String asJson = ChatSerializer.a(new Trans("book.pageIndicator", 1, 2));
-		assertTrue(asJson.indexOf("\"translate\":\"book.pageIndicator\"") != -1);
-		assertTrue(asJson.indexOf("\"with\":[\"1\",\"2\"]") != -1);
+		assertTrue(asJson.contains("\"translate\":\"book.pageIndicator\""));
+		assertTrue(asJson.contains("\"with\":[\"1\",\"2\"]"));
 	}
 
 }

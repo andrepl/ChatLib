@@ -2,8 +2,8 @@ package org.bukkit.support;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
-import org.bukkit.craftbukkit.v1_7_R3.inventory.CraftItemFactory;
-import org.bukkit.craftbukkit.v1_7_R3.util.Versioning;
+import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemFactory;
+import org.bukkit.craftbukkit.v1_8_R1.util.Versioning;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -12,10 +12,13 @@ import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class DummyServer implements InvocationHandler {
+
     private static interface MethodHandler {
         Object handle(DummyServer server, Object[] args);
     }
+
     private static final HashMap<Method, MethodHandler> methods = new HashMap<Method, MethodHandler>();
+
     static {
         try {
             methods.put(

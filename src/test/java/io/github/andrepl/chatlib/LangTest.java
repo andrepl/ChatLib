@@ -14,7 +14,6 @@ import static org.junit.Assert.assertEquals;
 
 public class LangTest extends AbstractTestingBase {
 
-
 	@BeforeClass
 	public static void setupLang() throws IOException {
 		Lang.initialize(null);
@@ -54,5 +53,4 @@ public class LangTest extends AbstractTestingBase {
 	public void translateWithVars() {
 		assertEquals("Page 1 of 10", Lang.translate("book.pageIndicator", 1, 10));
 	}
-
 }

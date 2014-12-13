@@ -3,6 +3,7 @@ package org.bukkit.support;
 import java.lang.reflect.Field;
 
 public class Util {
+
     /*
     public static <T> T getInternalState(Object object, String fieldName) {
         return getInternalState(object.getClass(), object, fieldName);
