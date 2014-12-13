@@ -107,6 +107,15 @@ public class Trans extends ChatMessage {
         return this;
     }
 
+    public String getShiftClickText() {
+        return getChatModifier().j();
+    }
+
+    public Trans setShiftClickText(String text) {
+        getChatModifier().setInsertion(text);
+        return this;
+    }
+
     public ChatHoverable getChatHoverable() {
         return getChatModifier().i();
     }
