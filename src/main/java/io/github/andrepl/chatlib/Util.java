@@ -1,10 +1,11 @@
 package io.github.andrepl.chatlib;
 
+import net.minecraft.server.v1_8_R1.ChatModifier;
 import net.minecraft.server.v1_8_R1.ChatComponentText;
+import net.minecraft.server.v1_8_R1.ChatHoverable;
 import net.minecraft.server.v1_8_R1.IChatBaseComponent;
 import net.minecraft.server.v1_8_R1.NBTTagCompound;
 import net.minecraft.server.v1_8_R1.PacketPlayOutChat;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_8_R1.inventory.CraftItemStack;
@@ -27,22 +28,31 @@ public class Util {
         return stack.getItem().a(stack) + ".name";
     }
 
-    public static Trans fromItemStack(ItemStack stack) {
+    /**
+     * Creates a new chat base component object from a Bukkit ItemStack.
+     *
+     * @param stack the stack to create from
+     * @return the created chat base component
+     */
+    public static IChatBaseComponent fromItemStack(ItemStack stack) {
         net.minecraft.server.v1_8_R1.ItemStack nms = CraftItemStack.asNMSCopy(stack);
         NBTTagCompound tag = new NBTTagCompound();
         nms.save(tag);
-        return new Trans(getName(nms)).
-                setColor(ChatColor.getByChar(nms.u().e.name())).
-                setHover(HoverAction.SHOW_ITEM, new ChatComponentText(tag.toString()));
+
+        ChatComponentText text = new ChatComponentText(getName(nms));
+        ChatModifier modifier = text.getChatModifier();
+        modifier.setColor(nms.u().e);
+        modifier.setChatHoverable(new ChatHoverable(HoverAction.SHOW_ITEM.getNMS(), new ChatComponentText(tag.toString())));
+        return text;
     }
 
-    public static void send(CommandSender sender, IChatBaseComponent text) {
+    protected static void send(CommandSender sender, IChatBaseComponent text, ChatPosition position) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            PacketPlayOutChat packet = new PacketPlayOutChat(text, (byte) 0);
+            PacketPlayOutChat packet = new PacketPlayOutChat(text, position.getId());
             ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
         } else {
-            sender.sendMessage(text.c());
+            sender.sendMessage(text.getText());
         }
     }
 }

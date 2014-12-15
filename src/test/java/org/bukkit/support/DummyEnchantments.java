@@ -1,10 +1,11 @@
 package org.bukkit.support;
 
-import net.minecraft.server.v1_7_R3.Enchantment;
+import net.minecraft.server.v1_8_R1.Enchantment;
 
 public class DummyEnchantments {
+
     static {
-        Enchantment.byId.getClass();
+        Enchantment.b.getClass();
         org.bukkit.enchantments.Enchantment.stopAcceptingRegistrations();
     }
 
